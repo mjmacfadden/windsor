@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Windsor Greetings</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <!-- Open Graph meta tags -->
+        <meta property="og:title" content="Windsor - Hand Crafted Digital Greeting Cards" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mmacfadden.com/windsor" />
+        <meta property="og:image" content="https://mmacfadden.com/windsor/img/og_image.jpg" /> <!-- Replace with your image -->
+        <meta property="og:description" content="Turn cherished moments into digital keepsakes." />
+        <meta property="og:site_name" content="Windsor" />
+        <meta property="og:locale" content="en_US" />
+    </head>
+    <body>
+
+        <!-- https://codepen.io/mjmacfadden/pen/wvVeaEy?editors=1100 -->
+
+        <p class="copied">URL COPIED</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col pt-3">
+                    <a href="/windsor"><img src="img/windsor_logo.png" class="image-fluid windsor_logo"/></a>
+                    <!--<h1><a href="/windsor" class="logo"><i class="bi bi-envelope"></i> windsor</a></h1>-->
+                </div>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row ">
+                <div class="col-md-6" id="conditional-full-width">
+                    <div class="center-card">
+                        <div class="flip">
+                            <div class="front" style="background-image: url(img/choose_a_design.jpg)">
+                            </div>
+                            <div class="back">
+                                <h2 id="to">To: <span></span></span></h2>
+                                <h2 id="from">From: <span></span></span></h2>
+                                <p id="message"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="arrow jiggle" id="flipTrigger">click to flip <img src="img/arrow_up.png" class="arrow" /></p>
+                </div>
+                <div class="col-md-6 hide input_form">
+                    <form class="card" style="border:none;">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="toInput" placeholder="to..." oninput="updateCardAndUrl()">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="fromInput" placeholder="from..." oninput="updateCardAndUrl()">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="messageInput" rows="3" placeholder="message..." oninput="updateCardAndUrl()"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="updateButton" onclick="shareOrCopyUrl()">Share <i class="bi bi-send"></i></button>
+                    </form> 
+                    <div class="filters">
+                        <p class="arrow">categories <img src="img/arrow_down.png" class="arrow mb-3" style="top:10px;" /></p>
+                        <button class="btn btn-outline-secondary btn-sm" id="birthday">Birthday</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="christmas">Christmas</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="congratulations">Congratulations</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="graduation">Graduation</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="halloweed">Halloween</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="hanukkah">Hanukkah</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="just_because">Just Because</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="sympathy">Sympathy</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="thanksgiving">Thanksgiving</button>
+                        <button class="btn btn-outline-secondary btn-sm" id="thank_you">Thank You</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row hide">
+                <div class="col">
+                    <div class="pt-4" id="card_images">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="scripts.js" async defer></script>
+    </body>
+</html>
