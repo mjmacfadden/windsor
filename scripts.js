@@ -1,9 +1,9 @@
 // Array of arrays to hold image data
 const imagesData = [
     {category: "default", filename: "choose_a_design", alt: "Choose A Design", id: "0", classes: "thumb img-thumbnail default_image"},
-    {category: "birthday", filename: "birthday_balloon_cake", alt: "Birthday - Balloon Cake", id: "1", classes: "thumb img-thumbnail"},
-    {category: "birthday", filename: "birthday_cupcake_cart", alt: "Birthday - Cupcake Cart", id: "2", classes: "thumb img-thumbnail"},
-    {category: "birthday", filename: "birthday_cupcake_line_art", alt: "Birthday - Cupcake Line Art", id: "3", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_boy"], filename: "birthday_balloon_cake", alt: "Birthday - Balloon Cake", id: "1", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_boy"], filename: "birthday_cupcake_cart", alt: "Birthday - Cupcake Cart", id: "2", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_girl"], filename: "birthday_cupcake_line_art", alt: "Birthday - Cupcake Line Art", id: "3", classes: "thumb img-thumbnail"},
     {category: "birthday", filename: "birthday_gift_box", alt: "Birthday - Gift Box", id: "4", classes: "thumb img-thumbnail"},
     {category: "birthday", filename: "birthday_happy_cake", alt: "Birthday - Happy Cake", id: "5", classes: "thumb img-thumbnail"},
     {category: "birthday", filename: "birthday_owl", alt: "Birthday - Owl", id: "6", classes: "thumb img-thumbnail"},
@@ -51,7 +51,7 @@ const imagesData = [
 
 ];
 
-let activeButton = null; // To track the currently active button
+//let activeButton = null; // To track the currently active button
 
 function displayImages(category = null) {
     // Clear the current images
@@ -67,7 +67,8 @@ function displayImages(category = null) {
 
     // Filter and display images based on the category
     sortedImages
-        .filter(image => !category || image.category === category)
+        //.filter(image => !category || image.category === category)
+        .filter(image => !category || image.category.includes(category))
         .forEach(image => {
             const imgElement = document.createElement('img');
             imgElement.src = `img/thumbs/${image.filename}.jpg`;
@@ -88,12 +89,16 @@ function displayImages(category = null) {
     });
 }
 
+let activeButton = null; // Track the currently active button
+let activeDropdownItem = null; // Track the currently active dropdown item
+
 // Function to handle button style changes
-function updateButtonStyles(clickedButtonId) {
+function updateButtonStyles(mainButtonId, dropdownItemId = null) {
+    // Style the main buttons
     const buttons = document.querySelectorAll('.filters button');
     buttons.forEach((button) => {
-        if (button.id === clickedButtonId) {
-            // Make the clicked button solid
+        if (button.id === mainButtonId || button.classList.contains(`${mainButtonId}-toggle`)) {
+            // Make both main and dropdown toggle buttons solid
             button.classList.remove('btn-outline-secondary');
             button.classList.add('btn-secondary');
         } else {
@@ -102,28 +107,58 @@ function updateButtonStyles(clickedButtonId) {
             button.classList.add('btn-outline-secondary');
         }
     });
+
+    // Style the dropdown items
+    const dropdownItems = document.querySelectorAll('.filters .dropdown-item');
+    dropdownItems.forEach((item) => {
+        if (item.id === dropdownItemId) {
+            // Highlight the selected dropdown item
+            item.classList.add('active');
+        } else {
+            // Remove active style from other dropdown items
+            item.classList.remove('active');
+        }
+    });
 }
 
-function handleButtonClick(category, buttonId, event) {
+function handleButtonClick(category, buttonId, event, isDropdown = false) {
     event.preventDefault(); // Prevent page scroll
 
-    if (activeButton === buttonId) {
-        // If the clicked button is already active, reset the filter to show all images
+    if (!isDropdown && activeButton === buttonId) {
+        // If the main button is already active, reset to show all images
         displayImages();
         updateButtonStyles(null); // Revert all buttons to outlined
-        activeButton = null; // No active button anymore
+        activeButton = null;
+        activeDropdownItem = null; // No active dropdown item
     } else {
-        // Set the new active button and display filtered images
+        // Display filtered images based on category
         displayImages(category);
-        updateButtonStyles(buttonId);
-        activeButton = buttonId; // Set the new active button
+
+        if (isDropdown) {
+            // If a dropdown item is clicked, keep the main button and dropdown toggle active
+            updateButtonStyles(activeButton, buttonId);
+            activeDropdownItem = buttonId; // Set the active dropdown item
+        } else {
+            updateButtonStyles(buttonId); // Update main button styles only
+            activeButton = buttonId; // Set the active main button
+            activeDropdownItem = null; // Clear any dropdown item selection
+        }
     }
 }
 
-
+// Event listener for the main "Birthday" button
 document.getElementById('birthday').addEventListener('click', function(event) {
-    handleButtonClick('birthday', 'birthday', event); // Pass event to the function
+    handleButtonClick('birthday', 'birthday', event);
 });
+
+// Event listeners for dropdown items
+document.getElementById('birthday_boy').addEventListener('click', function(event) {
+    handleButtonClick('birthday_boy', 'birthday_boy', event, true);
+});
+document.getElementById('birthday_girl').addEventListener('click', function(event) {
+    handleButtonClick('birthday_girl', 'birthday_girl', event, true);
+});
+
 document.getElementById('christmas').addEventListener('click', function(event) {
     handleButtonClick('christmas', 'christmas', event);
 });
@@ -151,6 +186,7 @@ document.getElementById('just_because').addEventListener('click', function(event
 document.getElementById('sympathy').addEventListener('click', function(event) {
     handleButtonClick('sympathy', 'sympathy', event);
 });
+
 
 
 
@@ -333,17 +369,6 @@ function loadImageFromUrlParams(imageId) {
     }
 }
 
-// Function to copy the current URL with parameters to the clipboard
-/*
-function copyUrlToClipboard() {
-    const currentUrl = window.location.href; // Get the full URL including parameters
-
-    // Copy the URL to the clipboard
-    navigator.clipboard.writeText(currentUrl).catch(err => {
-        console.error('Failed to copy the URL: ', err);
-    });
-}
-*/
 // Function to share on mobile or copy the current URL on desktop
 function shareOrCopyUrl() {
     const currentUrl = window.location.href; // Get the full URL including parameters

@@ -69,7 +69,18 @@
                     </form> 
                     <div class="filters">
                         <p class="arrow">categories <img src="img/arrow_down.png" class="arrow mb-3" style="top:10px;" /></p>
-                        <button class="btn btn-outline-secondary btn-sm" id="birthday">Birthday</button>
+                        <div class="btn-group">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" id="birthday">
+                              Birthday
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split birthday-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                              </button>
+                            <ul class="dropdown-menu" aria-labelledby="birthday">
+                              <li class="dropdown-item" id="birthday_boy">Boy</li>
+                              <li class="dropdown-item" id="birthday_girl">Girl</li>
+                            </ul>
+                        </div>
                         <button class="btn btn-outline-secondary btn-sm" id="christmas">Christmas</button>
                         <button class="btn btn-outline-secondary btn-sm" id="congratulations">Congratulations</button>
                         <button class="btn btn-outline-secondary btn-sm" id="graduation">Graduation</button>
