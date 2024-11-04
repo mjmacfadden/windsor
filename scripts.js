@@ -52,7 +52,7 @@ const imagesData = [
 ];
 
 //let activeButton = null; // To track the currently active button
-
+/*
 function displayImages(category = null) {
     // Clear the current images
     const cardImages = document.getElementById('card_images');
@@ -88,6 +88,58 @@ function displayImages(category = null) {
         });
     });
 }
+*/
+function displayImages(category = null) {
+    // Clear the current images
+    const cardImages = document.getElementById('card_images');
+    cardImages.innerHTML = '';
+
+    // Sort the imagesData array by category
+    const sortedImages = [...imagesData].sort((a, b) => {
+        if (a.category < b.category) return -1;
+        if (a.category > b.category) return 1;
+        return 0;
+    });
+
+    // Filter and display images based on the category
+    sortedImages
+        .filter(image => !category || image.category.includes(category))
+        .forEach(image => {
+            // Create a container div for each image
+            const imgContainer = document.createElement('div');
+            imgContainer.classList.add('image-container');
+            
+            // Create the image element
+            const imgElement = document.createElement('img');
+            imgElement.src = `img/thumbs/${image.filename}.jpg`;
+            imgElement.alt = image.alt;
+            imgElement.id = image.id;
+            imgElement.className = image.classes;
+
+            // Append the image to the container div
+            imgContainer.appendChild(imgElement);
+
+            // Create the star icon element (using Bootstrap Icons)
+            const starIcon = document.createElement('i');
+            starIcon.className = 'bi bi-star star-icon';
+
+            // Append the star icon to the container div
+            imgContainer.appendChild(starIcon);
+
+            // Append the container to cardImages
+            cardImages.appendChild(imgContainer);
+        });
+
+    // Add event listeners to all image thumbnails
+    const thumbnails = document.querySelectorAll('.thumb');
+    thumbnails.forEach((thumb) => {
+        thumb.addEventListener('click', function() {
+            const imageId = thumb.getAttribute('id');  // Get the ID of the clicked image
+            updateBackgroundImage(imageId);  // Update the background image of the card and flip to front
+        });
+    });
+}
+
 
 let activeButton = null; // Track the currently active button
 let activeDropdownItem = null; // Track the currently active dropdown item

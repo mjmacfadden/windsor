@@ -168,6 +168,39 @@ FILTER BUTTONS
 
 /*
 =================================================
+STARS
+=================================================
+*/
+/* Container for each image */
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px; /* Adds spacing around images */
+}
+
+/* Style for the star icon */
+.star-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color:#CCCCCC;
+    /*color: #FFD700; /* Gold color */
+    font-size: 1.1em;
+    cursor: pointer; /* Optional: makes the star clickable */
+}
+
+/* Image styling */
+.image-container img {
+    display: block;
+    width: 100%; /* Ensures the image fills the container */
+    height: auto;
+}
+
+
+
+
+/*
+=================================================
 MOBILE ONLY
 =================================================
 */
@@ -184,3 +217,4 @@ MOBILE ONLY
         position:static;
     }
 }
+
