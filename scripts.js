@@ -47,12 +47,12 @@ const imagesData = [
     {category: "just_because", filename: "just_because_autumn_lake", alt: "Just Because - Autumn Lake", id: "45" , classes: "thumb img-thumbnail"},
     {category: "thank_you", filename: "thank_you_bouquet_and_sun", alt: "Thank You - Bouquet and Sun", id: "46", classes: "thumb img-thumbnail"},
     {category: "sympathy", filename: "sympathy_cherry_blossom", alt: "Sympathy - Cherry Blossom", id: "47", classes: "thumb img-thumbnail"},
+    {category: "birthday", filename: "birthday_party_sloth", alt: "Birthday - Party Sloth", id: "48", classes: "thumb img-thumbnail"},
 
 
 ];
 
-//let activeButton = null; // To track the currently active button
-/*
+
 function displayImages(category = null) {
     // Clear the current images
     const cardImages = document.getElementById('card_images');
@@ -88,121 +88,140 @@ function displayImages(category = null) {
         });
     });
 }
-*/
+
+let activeButton = null; // Track the currently active button
+let activeDropdownItem = null; // Track the currently active dropdown item
+let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Array to store favorite images
+
+
+// Function to display images based on category or favorites
 function displayImages(category = null) {
     // Clear the current images
     const cardImages = document.getElementById('card_images');
     cardImages.innerHTML = '';
 
-    // Sort the imagesData array by category
-    const sortedImages = [...imagesData].sort((a, b) => {
-        if (a.category < b.category) return -1;
-        if (a.category > b.category) return 1;
-        return 0;
-    });
+    // Determine if displaying favorites or a specific category
+    const imagesToDisplay = category === 'favorites' 
+        ? imagesData.filter(image => favorites.includes(image.id))
+        : imagesData.filter(image => !category || image.category.includes(category));
 
-    // Filter and display images based on the category
-    sortedImages
-        .filter(image => !category || image.category.includes(category))
+    // Sort and display images
+    imagesToDisplay
+        .sort((a, b) => (a.category < b.category ? -1 : 1))
         .forEach(image => {
-            // Create a container div for each image
             const imgContainer = document.createElement('div');
             imgContainer.classList.add('image-container');
-            
-            // Create the image element
+
             const imgElement = document.createElement('img');
             imgElement.src = `img/thumbs/${image.filename}.jpg`;
             imgElement.alt = image.alt;
             imgElement.id = image.id;
             imgElement.className = image.classes;
 
-            // Append the image to the container div
             imgContainer.appendChild(imgElement);
 
-            // Create the star icon element (using Bootstrap Icons)
+            // Create the star icon element
             const starIcon = document.createElement('i');
-            starIcon.className = 'bi bi-star star-icon';
-
-            // Append the star icon to the container div
+            starIcon.className = favorites.includes(image.id) 
+                ? 'bi bi-star-fill star-icon' 
+                : 'bi bi-star star-icon';
             imgContainer.appendChild(starIcon);
 
-            // Append the container to cardImages
+            starIcon.addEventListener('click', function() {
+                toggleFavorite(image, starIcon);
+            });
+
             cardImages.appendChild(imgContainer);
         });
 
-    // Add event listeners to all image thumbnails
+    // Add event listeners to image thumbnails for other functionalities
     const thumbnails = document.querySelectorAll('.thumb');
-    thumbnails.forEach((thumb) => {
+    thumbnails.forEach(thumb => {
         thumb.addEventListener('click', function() {
-            const imageId = thumb.getAttribute('id');  // Get the ID of the clicked image
-            updateBackgroundImage(imageId);  // Update the background image of the card and flip to front
+            const imageId = thumb.getAttribute('id');
+            updateBackgroundImage(imageId); // Update the background image and flip to the front
         });
     });
 }
 
+// Function to toggle the favorite status of an image
+function toggleFavorite(image, starIcon) {
+    if (favorites.includes(image.id)) {
+        favorites = favorites.filter(id => id !== image.id); // Remove from favorites
+        starIcon.classList.replace('bi-star-fill', 'bi-star'); // Change to outlined star
+    } else {
+        favorites.push(image.id); // Add to favorites
+        starIcon.classList.replace('bi-star', 'bi-star-fill'); // Change to solid star
+    }
 
-let activeButton = null; // Track the currently active button
-let activeDropdownItem = null; // Track the currently active dropdown item
+    localStorage.setItem('favorites', JSON.stringify(favorites)); // Save to localStorage
+    console.log(favorites); // Print to console for verification
+}
 
-// Function to handle button style changes
+
+
+// Update button styles, including the favorites button
 function updateButtonStyles(mainButtonId, dropdownItemId = null) {
-    // Style the main buttons
     const buttons = document.querySelectorAll('.filters button');
     buttons.forEach((button) => {
         if (button.id === mainButtonId || button.classList.contains(`${mainButtonId}-toggle`)) {
-            // Make both main and dropdown toggle buttons solid
             button.classList.remove('btn-outline-secondary');
             button.classList.add('btn-secondary');
         } else {
-            // Revert others back to outlined
             button.classList.remove('btn-secondary');
             button.classList.add('btn-outline-secondary');
         }
     });
 
-    // Style the dropdown items
     const dropdownItems = document.querySelectorAll('.filters .dropdown-item');
     dropdownItems.forEach((item) => {
         if (item.id === dropdownItemId) {
-            // Highlight the selected dropdown item
             item.classList.add('active');
         } else {
-            // Remove active style from other dropdown items
             item.classList.remove('active');
         }
     });
 }
 
+// Handle button clicks, with toggle functionality for the favorites button
 function handleButtonClick(category, buttonId, event, isDropdown = false) {
-    event.preventDefault(); // Prevent page scroll
+    event.preventDefault();
 
     if (!isDropdown && activeButton === buttonId) {
-        // If the main button is already active, reset to show all images
-        displayImages();
+        displayImages(); // Show all images
         updateButtonStyles(null); // Revert all buttons to outlined
         activeButton = null;
-        activeDropdownItem = null; // No active dropdown item
+        activeDropdownItem = null;
     } else {
-        // Display filtered images based on category
-        displayImages(category);
-
-        if (isDropdown) {
-            // If a dropdown item is clicked, keep the main button and dropdown toggle active
-            updateButtonStyles(activeButton, buttonId);
-            activeDropdownItem = buttonId; // Set the active dropdown item
-        } else {
-            updateButtonStyles(buttonId); // Update main button styles only
-            activeButton = buttonId; // Set the active main button
-            activeDropdownItem = null; // Clear any dropdown item selection
-        }
+        displayImages(category); // Display filtered images by category or favorites
+        updateButtonStyles(buttonId); // Update button styles
+        activeButton = buttonId; // Set active button
+        activeDropdownItem = isDropdown ? buttonId : null;
     }
 }
 
+// Function to toggle the favorite status of an image
+function toggleFavorite(image, starIcon) {
+    if (favorites.includes(image.id)) {
+        favorites = favorites.filter(id => id !== image.id);
+        starIcon.classList.replace('bi-star-fill', 'bi-star');
+    } else {
+        favorites.push(image.id);
+        starIcon.classList.replace('bi-star', 'bi-star-fill');
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    console.log(favorites); // For testing
+}
+
+// Event listener for favorites button
+document.getElementById('favorites').addEventListener('click', function(event) {
+    handleButtonClick('favorites', 'favorites', event);
+});
 // Event listener for the main "Birthday" button
 document.getElementById('birthday').addEventListener('click', function(event) {
     handleButtonClick('birthday', 'birthday', event);
 });
-
 // Event listeners for dropdown items
 document.getElementById('birthday_boy').addEventListener('click', function(event) {
     handleButtonClick('birthday_boy', 'birthday_boy', event, true);
@@ -210,7 +229,6 @@ document.getElementById('birthday_boy').addEventListener('click', function(event
 document.getElementById('birthday_girl').addEventListener('click', function(event) {
     handleButtonClick('birthday_girl', 'birthday_girl', event, true);
 });
-
 document.getElementById('christmas').addEventListener('click', function(event) {
     handleButtonClick('christmas', 'christmas', event);
 });

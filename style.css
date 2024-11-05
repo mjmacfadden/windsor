@@ -188,6 +188,10 @@ STARS
     font-size: 1.1em;
     cursor: pointer; /* Optional: makes the star clickable */
 }
+/* Style for solid (favorited) star */
+.bi-star-fill {
+    color: #FFD700; /* Gold color for filled star */
+}
 
 /* Image styling */
 .image-container img {
@@ -195,6 +199,7 @@ STARS
     width: 100%; /* Ensures the image fills the container */
     height: auto;
 }
+
 
 
 
