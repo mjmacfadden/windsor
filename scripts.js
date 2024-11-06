@@ -51,6 +51,7 @@ const imagesData = [
     {category: ["birthday", "birthday_boy"], filename: "birthday_dino_balloons", alt: "Birthday - Dino Balloons", id: "49", classes: "thumb img-thumbnail"},
     {category: ["birthday", "birthday_boy"], filename: "birthday_baby_blue", alt: "Birthday - Baby Blue", id: "50", classes: "thumb img-thumbnail"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_pink_wreath", alt: "Birthday - Pink Wreath", id: "51", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_girl"], filename: "birthday_minimal_flowers", alt: "Birthday - Minimal Flowers", id: "52", classes: "thumb img-thumbnail"},
 
 
 ];
