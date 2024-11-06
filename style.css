@@ -168,6 +168,20 @@ FILTER BUTTONS
 
 /*
 =================================================
+PRINTFUL
+=================================================
+*/
+#printful{
+    color:#8F9294;
+    text-decoration: none;
+    transition:.2s;
+}
+#printful:hover{
+    opacity:0.8;
+}
+
+/*
+=================================================
 STARS
 =================================================
 */
@@ -220,6 +234,7 @@ MOBILE ONLY
     }
     .filters{
         position:static;
+        margin-top:44px;
     }
 }
 

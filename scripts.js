@@ -1,8 +1,8 @@
 // Array of arrays to hold image data
 const imagesData = [
     {category: "default", filename: "choose_a_design", alt: "Choose A Design", id: "0", classes: "thumb img-thumbnail default_image"},
-    {category: ["birthday", "birthday_boy"], filename: "birthday_balloon_cake", alt: "Birthday - Balloon Cake", id: "1", classes: "thumb img-thumbnail"},
-    {category: ["birthday", "birthday_boy"], filename: "birthday_cupcake_cart", alt: "Birthday - Cupcake Cart", id: "2", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_boy"], filename: "birthday_balloon_cake", alt: "Birthday - Balloon Cake", id: "1", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-balloon-cake"},
+    {category: ["birthday", "birthday_boy"], filename: "birthday_cupcake_cart", alt: "Birthday - Cupcake Cart", id: "2", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-cupcake-cart"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_cupcake_line_art", alt: "Birthday - Cupcake Line Art", id: "3", classes: "thumb img-thumbnail"},
     {category: "birthday", filename: "birthday_gift_box", alt: "Birthday - Gift Box", id: "4", classes: "thumb img-thumbnail"},
     {category: "birthday", filename: "birthday_happy_cake", alt: "Birthday - Happy Cake", id: "5", classes: "thumb img-thumbnail"},
@@ -35,7 +35,7 @@ const imagesData = [
     {category: "thanksgiving", filename: "thanksgiving_stoic_turkey", alt: "Thanksgiving - Stoic Turkey", id: "32" , classes: "thumb img-thumbnail"},
     {category: "thanksgiving", filename: "thanksgiving_turkey_cornicopia", alt: "Thanksgiving - Turkey Cornicopia", id: "33" , classes: "thumb img-thumbnail"},
     {category: "congratulations", filename: "congratulations_splat", alt: "Congratulations - Splat", id: "34" , classes: "thumb img-thumbnail"},
-    {category: "just_because", filename: "just_because_mouse", alt: "Just Because - Mouse", id: "36" , classes: "thumb img-thumbnail"},
+    {category: "just_because", filename: "just_because_mouse", alt: "Just Because - Mouse", id: "36" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/just-because-mouse"},
     {category: "just_because", filename: "just_because_thinking_of_you_bear", alt: "Just Because - Thinking of You Bear", id: "37" , classes: "thumb img-thumbnail"},
     {category: "just_because", filename: "just_because_house_on_a_hill", alt: "Just Because - House On A Hill", id: "38" , classes: "thumb img-thumbnail"},
     {category: "just_because", filename: "just_because_thinking_of_you_couple", alt: "Just Because - Thinking of You Couple", id: "39" , classes: "thumb img-thumbnail"},
@@ -47,9 +47,9 @@ const imagesData = [
     {category: "just_because", filename: "just_because_autumn_lake", alt: "Just Because - Autumn Lake", id: "45" , classes: "thumb img-thumbnail"},
     {category: "thank_you", filename: "thank_you_bouquet_and_sun", alt: "Thank You - Bouquet and Sun", id: "46", classes: "thumb img-thumbnail"},
     {category: "sympathy", filename: "sympathy_cherry_blossom", alt: "Sympathy - Cherry Blossom", id: "47", classes: "thumb img-thumbnail"},
-    {category: "birthday", filename: "birthday_party_sloth", alt: "Birthday - Party Sloth", id: "48", classes: "thumb img-thumbnail", url:"https://windsorgreetings.printful.me/product/party-like-a-sloth"},
+    {category: "birthday", filename: "birthday_party_sloth", alt: "Birthday - Party Sloth", id: "48", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/party-like-a-sloth"},
     {category: ["birthday", "birthday_boy"], filename: "birthday_dino_balloons", alt: "Birthday - Dino Balloons", id: "49", classes: "thumb img-thumbnail"},
-    {category: ["birthday", "birthday_boy"], filename: "birthday_baby_blue", alt: "Birthday - Baby Blue", id: "50", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_boy"], filename: "birthday_baby_blue", alt: "Birthday - Baby Blue", id: "50", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/baby-blue"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_pink_wreath", alt: "Birthday - Pink Wreath", id: "51", classes: "thumb img-thumbnail"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_minimal_flowers", alt: "Birthday - Minimal Flowers", id: "52", classes: "thumb img-thumbnail"},
 
@@ -324,6 +324,22 @@ document.getElementById('toInput').addEventListener('input', updateCardAndUrl);
 document.getElementById('fromInput').addEventListener('input', updateCardAndUrl);
 document.getElementById('messageInput').addEventListener('input', updateCardAndUrl);
 
+
+// Function to update the Printful URL based on the selected image data
+function updatePrintfulURL(imageData) {
+    // Select the link element you want to update with the new URL
+    const cardLink = document.getElementById('printful'); // Ensure this ID matches your link element's ID
+
+    // Check if the link element exists
+    if (cardLink) {
+        // Use the image URL if it exists; otherwise, set the default URL
+        cardLink.href = imageData.url || "https://windsorgreetings.printful.me/";
+    } else {
+        console.error("Element with id 'printful' not found in the DOM.");
+    }
+}
+
+
 // Variable to keep track of the currently selected thumbnail
 let selectedThumbnail = null;
 
@@ -348,7 +364,10 @@ function updateBackgroundImage(imageId) {
         // Update the background image
         frontDiv.style.backgroundImage = `url(${imageUrl})`;
         frontDiv.setAttribute('data-image-id', imageId); // Store the image ID
-        updateCardAndUrl(); // Assuming this updates the card's URL and other details
+        updateCardAndUrl();
+        
+        // Pass the specific imageData object to updatePrintfulURL
+        updatePrintfulURL(imageData);
         
         // Ensure the card flips to the front if it's currently on the back
         if (card.classList.contains('flipped')) {
@@ -368,6 +387,7 @@ function updateBackgroundImage(imageId) {
 
         // Set the clicked thumbnail as the new selected thumbnail
         selectedThumbnail = clickedThumbnail;
+        UrlParams();
         
     } else {
         console.error(`Image with ID ${imageId} not found in imagesData`);
