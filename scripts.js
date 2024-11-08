@@ -8,7 +8,7 @@ const imagesData = [
     {category: "birthday", filename: "birthday_happy_cake", alt: "Birthday - Happy Cake", id: "5", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-happy-cake"},
     {category: "birthday", filename: "birthday_owl", alt: "Birthday - Owl", id: "6", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-owl"},
     {category: "birthday", filename: "birthday_unicorn", alt: "Birthday - Unicorn", id: "7", classes: "thumb img-thumbnail"},
-    {category: "birthday", filename: "birthday_wreath", alt: "Birthday - Wreath", id: "8", classes: "thumb img-thumbnail"},
+    {category: "birthday", filename: "birthday_wreath", alt: "Birthday - Wreath", id: "8", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-wreath"},
     {category: "halloween", filename: "halloween_jackolanterns", alt: "Halloween - Jackolanterns", id: "9", classes: "thumb img-thumbnail"},
     {category: "halloween", filename: "halloween_haunted_hill", alt: "Halloween - Haunted Hill", id: "10", classes: "thumb img-thumbnail"},
     {category: "halloween", filename: "halloween_jackolantern_and_skull", alt: "Halloween - Jackolantern and Skull", id: "11", classes: "thumb img-thumbnail"},
@@ -50,7 +50,7 @@ const imagesData = [
     {category: "birthday", filename: "birthday_party_sloth", alt: "Birthday - Party Sloth", id: "48", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/party-like-a-sloth"},
     {category: ["birthday", "birthday_boy"], filename: "birthday_dino_balloons", alt: "Birthday - Dino Balloons", id: "49", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-dino-balloons"},
     {category: ["birthday", "birthday_boy"], filename: "birthday_baby_blue", alt: "Birthday - Baby Blue", id: "50", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/baby-blue"},
-    {category: ["birthday", "birthday_girl"], filename: "birthday_pink_wreath", alt: "Birthday - Pink Wreath", id: "51", classes: "thumb img-thumbnail"},
+    {category: ["birthday", "birthday_girl"], filename: "birthday_pink_wreath", alt: "Birthday - Pink Wreath", id: "51", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-pink-wreath"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_minimal_flowers", alt: "Birthday - Minimal Flowers", id: "52", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-minimal-flowers"},
 
 
