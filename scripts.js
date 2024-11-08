@@ -29,7 +29,7 @@ const imagesData = [
     {category: "thanksgiving", filename: "thanksgiving_turkey_on_pumpkin", alt: "Thanksgiving - Turkey on Pumpkin", id: "26", classes: "thumb img-thumbnail"},
     {category: "christmas", filename: "christmas_sleigh_and_cottage", alt: "Christmas - Sleigh and Cottage", id: "27" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/chrismtas-sleigh-and-cottage"},
     {category: "christmas", filename: "christmas_home_and_tree", alt: "Christmas - Home and Tree", id: "28" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/christmas-home-and-tree"},
-    {category: "congratulations", filename: "congrautlations_hands_up", alt: "Congratulations - Hands Up", id: "29" , classes: "thumb img-thumbnail"},
+    {category: "congratulations", filename: "congrautlations_hands_up", alt: "Congratulations - Hands Up", id: "29" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/congratulations-hands-up"},
     {category: "congratulations", filename: "congratulations_sip_sip_hooray", alt: "Congratulations - Sip Sip, Hooray", id: "30" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/congratulations-sip-sip-hooray"},
     {category: "graduation", filename: "graduation_congratulations_cap", alt: "Graduation - Congratulations Cap", id: "31" , classes: "thumb img-thumbnail"},
     {category: "thanksgiving", filename: "thanksgiving_stoic_turkey", alt: "Thanksgiving - Stoic Turkey", id: "32" , classes: "thumb img-thumbnail"},
