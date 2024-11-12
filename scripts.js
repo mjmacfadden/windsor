@@ -1,4 +1,4 @@
-// Array of arrays to hold image data
+//Array of arrays to hold image data
 const imagesData = [
     {category: "default", filename: "choose_a_design", alt: "Choose A Design", id: "0", classes: "thumb img-thumbnail default_image"},
     {category: ["birthday", "birthday_boy"], filename: "birthday_balloon_cake", alt: "Birthday - Balloon Cake", id: "1", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-balloon-cake"},
