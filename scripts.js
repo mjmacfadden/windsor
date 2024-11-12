@@ -33,7 +33,7 @@ const imagesData = [
     {category: "congratulations", filename: "congratulations_sip_sip_hooray", alt: "Congratulations - Sip Sip, Hooray", id: "30" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/congratulations-sip-sip-hooray"},
     {category: "graduation", filename: "graduation_congratulations_cap", alt: "Graduation - Congratulations Cap", id: "31" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/graduation-congratulations-cap"},
     {category: "thanksgiving", filename: "thanksgiving_stoic_turkey", alt: "Thanksgiving - Stoic Turkey", id: "32" , classes: "thumb img-thumbnail"},
-    {category: "thanksgiving", filename: "thanksgiving_turkey_cornicopia", alt: "Thanksgiving - Turkey Cornicopia", id: "33" , classes: "thumb img-thumbnail"},
+    {category: "thanksgiving", filename: "thanksgiving_turkey_cornucopia", alt: "Thanksgiving - Turkey Cornucopia", id: "33" , classes: "thumb img-thumbnail"},
     {category: "congratulations", filename: "congratulations_splat", alt: "Congratulations - Splat", id: "34" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/congratulations-splat"},
     {category: "just_because", filename: "just_because_mouse", alt: "Just Because - Mouse", id: "36" , classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/just-because-mouse"},
     {category: "just_because", filename: "just_because_thinking_of_you_bear", alt: "Just Because - Thinking of You Bear", id: "37" , classes: "thumb img-thumbnail"},
