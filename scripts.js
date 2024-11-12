@@ -57,42 +57,44 @@ const imagesData = [
 ];
 
 
-function displayImages(category = null) {
-    // Clear the current images
-    const cardImages = document.getElementById('card_images');
-    cardImages.innerHTML = '';
+    function displayImages(category = null) {
+        // Clear the current images
+        const cardImages = document.getElementById('card_images');
+        cardImages.innerHTML = '';
 
-    // Sort the imagesData array by category
-    const sortedImages = [...imagesData].sort((a, b) => {
-        if (a.category < b.category) return -1;
-        if (a.category > b.category) return 1;
-        return 0;
-    });
-
-    // Filter and display images based on the category
-    sortedImages
-        //.filter(image => !category || image.category === category)
-        .filter(image => !category || image.category.includes(category))
-        .forEach(image => {
-            const imgElement = document.createElement('img');
-            imgElement.src = `img/thumbs/${image.filename}.jpg`;
-            imgElement.alt = image.alt;
-            imgElement.id = image.id;
-            imgElement.className = image.classes;
-
-            cardImages.appendChild(imgElement);
+        // Sort the imagesData array by category
+        const sortedImages = [...imagesData].sort((a, b) => {
+            if (a.category < b.category) return -1;
+            if (a.category > b.category) return 1;
+            return 0;
         });
 
-    // Add event listeners to all image thumbnails
-    const thumbnails = document.querySelectorAll('.thumb');
-    thumbnails.forEach((thumb) => {
-        thumb.addEventListener('click', function() {
-            const imageId = thumb.getAttribute('id');  // Get the ID of the clicked image
-            updateBackgroundImage(imageId);  // Update the background image of the card and flip to front
-        });
-    });
-}
+        // Filter and display images based on the category
+        sortedImages
+            //.filter(image => !category || image.category === category)
+            .filter(image => !category || image.category.includes(category))
+            .forEach(image => {
+                const imgElement = document.createElement('img');
+                imgElement.src = `img/thumbs/${image.filename}.jpg`;
+                imgElement.alt = image.alt;
+                imgElement.id = image.id;
+                imgElement.className = image.classes;
 
+                cardImages.appendChild(imgElement);
+            });
+
+        // Add event listeners to all image thumbnails
+        const thumbnails = document.querySelectorAll('.thumb');
+        thumbnails.forEach((thumb) => {
+            thumb.addEventListener('click', function() {
+                const imageId = thumb.getAttribute('id');  // Get the ID of the clicked image
+                updateBackgroundImage(imageId);  // Update the background image of the card and flip to front
+            });
+        });
+    }
+
+
+    
 let activeButton = null; // Track the currently active button
 let activeDropdownItem = null; // Track the currently active dropdown item
 let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Array to store favorite images
@@ -111,32 +113,38 @@ function displayImages(category = null) {
 
     // Sort and display images
     imagesToDisplay
-        .sort((a, b) => (a.category < b.category ? -1 : 1))
-        .forEach(image => {
-            const imgContainer = document.createElement('div');
-            imgContainer.classList.add('image-container');
+    .sort((a, b) => (a.category < b.category ? -1 : 1))
+    .forEach(image => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('image-container');
 
-            const imgElement = document.createElement('img');
-            imgElement.src = `img/thumbs/${image.filename}.jpg`;
-            imgElement.alt = image.alt;
-            imgElement.id = image.id;
-            imgElement.className = image.classes;
+        const linkElement = document.createElement('a');
+        linkElement.href = "#top";
 
-            imgContainer.appendChild(imgElement);
+        const imgElement = document.createElement('img');
+        imgElement.src = `img/thumbs/${image.filename}.jpg`;
+        imgElement.alt = image.alt;
+        imgElement.id = image.id;
+        imgElement.className = image.classes;
 
-            // Create the star icon element
-            const starIcon = document.createElement('i');
-            starIcon.className = favorites.includes(image.id) 
-                ? 'bi bi-star-fill star-icon' 
-                : 'bi bi-star star-icon';
-            imgContainer.appendChild(starIcon);
+        // Wrap the image in the anchor tag
+        linkElement.appendChild(imgElement);
 
-            starIcon.addEventListener('click', function() {
-                toggleFavorite(image, starIcon);
-            });
+        imgContainer.appendChild(linkElement);
 
-            cardImages.appendChild(imgContainer);
+        // Create the star icon element
+        const starIcon = document.createElement('i');
+        starIcon.className = favorites.includes(image.id) 
+            ? 'bi bi-star-fill star-icon' 
+            : 'bi bi-star star-icon';
+        imgContainer.appendChild(starIcon);
+
+        starIcon.addEventListener('click', function() {
+            toggleFavorite(image, starIcon);
         });
+
+        cardImages.appendChild(imgContainer);
+    });
 
     // Add event listeners to image thumbnails for other functionalities
     const thumbnails = document.querySelectorAll('.thumb');
