@@ -171,10 +171,14 @@ FILTER BUTTONS
 PRINTFUL
 =================================================
 */
+#printful_button{
+    width:100%;
+}
 #printful{
     color:#8F9294;
     text-decoration: none;
     transition:.2s;
+    width:100%;
 }
 #printful:hover{
     color:#FFF;
