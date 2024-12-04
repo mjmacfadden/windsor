@@ -52,6 +52,7 @@ const imagesData = [
     {category: ["birthday", "birthday_boy"], filename: "birthday_baby_blue", alt: "Birthday - Baby Blue", id: "50", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/baby-blue"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_pink_wreath", alt: "Birthday - Pink Wreath", id: "51", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-pink-wreath"},
     {category: ["birthday", "birthday_girl"], filename: "birthday_minimal_flowers", alt: "Birthday - Minimal Flowers", id: "52", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/product/birthday-minimal-flowers"},
+    {category: "just_because", filename: "just_because_hang_in_there", alt: "Hang In There", id: "53", classes: "thumb img-thumbnail", url: "https://windsorgreetings.printful.me/"},
 
 
 ];
